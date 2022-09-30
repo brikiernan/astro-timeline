@@ -33,6 +33,7 @@ const App: React.FC = () => {
       title: 'Brian Event 2',
       startTime: '2022-01-01T00:30Z',
       endTime: '2022-01-01T05:00Z',
+      status: 'caution',
     });
   }, []);
 

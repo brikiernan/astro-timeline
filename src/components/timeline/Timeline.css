@@ -32,7 +32,7 @@ web-timeline::part(playhead) {
 }
 
 web-timeline::part(event status-critical) {
-  --TimelineEventBorder: hsl(0 100% 61%);
+  --TimelineEventBorder: var(--color-status-critical);
 }
 
 web-timeline::part(event status-caution) {
@@ -40,9 +40,9 @@ web-timeline::part(event status-caution) {
 }
 
 web-timeline::part(event status-serious) {
-  --TimelineEventBorder: hsl(2 100% 50%);
+  --TimelineEventBorder: var(--color-status-serious);
 }
 
 web-timeline::part(event status-standby) {
-  --TimelineEventBorder: hsl(195 100% 70%);
+  --TimelineEventBorder: var(--color-status-standby);
 }
