@@ -1,0 +1,48 @@
+web-timeline {
+  --TimelineTrack: var(--color-background-surface-default);
+  --TimelineTrackPast: var(--color-palette-darkblue-700);
+  --TimelineEventBorder: var(--color-background-interactive-default);
+
+  --TimelineNestedTrackOpeningShadow: hsl(0 0% 0% / 50%) 0 12px 6px -12px inset;
+  --TimelineNestedTrackClosingShadow: hsl(0 0% 0% / 50%) 0 -12px 6px -12px inset;
+}
+
+web-timeline::part(toggle) {
+  outline-color: var(--color-background-interactive-default);
+}
+
+web-timeline::part(event) {
+  /* Layout */
+  align-items: center;
+  padding: 8px;
+
+  /* Appearance */
+  background-color: var(--color-background-base-default);
+  border-radius: 0.1875em;
+  box-shadow: var(--TimelineEventBorder) 0 0 0 1px inset;
+}
+
+web-timeline::part(toggle) {
+  color: var(--color-background-interactive-default);
+}
+
+web-timeline::part(playhead) {
+  /* Appearance */
+  color: var(--TimelinePlayhead);
+}
+
+web-timeline::part(event status-critical) {
+  --TimelineEventBorder: hsl(0 100% 61%);
+}
+
+web-timeline::part(event status-caution) {
+  --TimelineEventBorder: var(--color-status-caution);
+}
+
+web-timeline::part(event status-serious) {
+  --TimelineEventBorder: hsl(2 100% 50%);
+}
+
+web-timeline::part(event status-standby) {
+  --TimelineEventBorder: hsl(195 100% 70%);
+}
