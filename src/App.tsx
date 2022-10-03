@@ -22,6 +22,8 @@ const App: React.FC = () => {
       <br />
       <ExperimentalTimeline playhead={playhead} />
       <br />
+      <hr />
+      <br />
       <BetaTimeline playhead={playhead} />
     </main>
   );
