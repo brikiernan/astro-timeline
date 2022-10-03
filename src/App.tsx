@@ -1,53 +1,32 @@
-import { Timeline, TimelineElement } from './components/timeline/Timeline.js'
-import { useEffect, useRef } from 'react';
+import { useEffect, useState } from 'react';
+import { initial } from './data/events';
+import { usePlayhead } from './hooks/use-playhead';
+import ExperimentalTimeline from './components/ExperimentalTimeline';
+import BetaTimeline from './components/BetaTimeline';
 
 const App: React.FC = () => {
-  const timelineRef = useRef<TimelineElement>();
+  const [zoom, setZoom] = useState(initial.zoom);
+  const playhead = usePlayhead();
 
-  useEffect(() => {
-    const timeline = timelineRef.current;
-
-    if (!timeline) {
-      return
-    }
-
-    // add a track
-    const track = timeline.addTrack({
-      title: 'Brian Track 1',
-    });
-
-    // add an event to the track
-    track.addEvent({
-      title: 'Brian Event 1',
-      startTime: '2022-01-01T00:30Z',
-      endTime: '2022-01-01T05:00Z',
-    });
-
-    // add a subtrack
-    const subtrack = track.addTrack({
-      title: 'Brian Subtrack 1',
-    });
-
-    // add an event to the subtrack
-    subtrack.addEvent({
-      title: 'Brian Event 2',
-      startTime: '2022-01-01T00:30Z',
-      endTime: '2022-01-01T05:00Z',
-      status: 'caution',
-    });
-  }, []);
+  /**
+   * React.useEffect runs twice on initial load in development with
+   * React.StrictMode. To disable this behavior comment out or
+   * remove React.StrictMode in index.tsx
+   *
+   * React.useEffect also runs on each save in development
+   */
+  useEffect(() => console.log('Logging...'), []);
 
   return (
-    <div>
-      <h1>Hey now timeline!</h1>
-      {/* I know I have to do more to impliment :-) */}
-      <Timeline
-        startTime="2022-01-01T00:00Z"
-        endTime="2022-01-02T00:00Z"
-        currentTime="2022-01-01T12:00Z"
-        ref={timelineRef}
-      />
-    </div>
+    <main>
+      <ExperimentalTimeline {...{ playhead, zoom }} />
+      <br />
+      <BetaTimeline {...{ playhead, setZoom, zoom }} />
+      <br />
+      <p>Zoom: {zoom}</p>
+      <br />
+      <p>Track time: {initial.trackTime} hours</p>
+    </main>
   );
 };
 
