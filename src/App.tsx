@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { initial } from './data/events';
 import { usePlayhead } from './hooks/use-playhead';
 import ExperimentalTimeline from './components/ExperimentalTimeline';
 import BetaTimeline from './components/BetaTimeline';
 
 const App: React.FC = () => {
-  const [zoom, setZoom] = useState(initial.zoom);
   const playhead = usePlayhead();
 
   /**
@@ -19,13 +18,11 @@ const App: React.FC = () => {
 
   return (
     <main>
-      <ExperimentalTimeline {...{ playhead, zoom }} />
+      <h3>Track's time: {initial.trackTime} hours</h3>
       <br />
-      <BetaTimeline {...{ playhead, setZoom, zoom }} />
+      <ExperimentalTimeline playhead={playhead} />
       <br />
-      <p>Zoom: {zoom}</p>
-      <br />
-      <p>Track time: {initial.trackTime} hours</p>
+      <BetaTimeline playhead={playhead} />
     </main>
   );
 };

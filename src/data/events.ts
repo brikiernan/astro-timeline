@@ -7,7 +7,7 @@ export const initial = {
   end: setIso(time + setHours(trackTime)),
   playhead: setIso(time + setHours(2.5)),
   start: setIso(time),
-  zoom: 5,
+  zoom: 3,
   trackTime,
 };
 

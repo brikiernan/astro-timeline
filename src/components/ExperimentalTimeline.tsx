@@ -1,5 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { events, initial } from '../data/events';
+import Zoom from './Zoom';
 import {
   Timeline,
   TimelineElement,
@@ -8,12 +9,13 @@ import {
 
 interface ExperimentalTimelineProps {
   playhead: string;
-  zoom: number;
 }
 
-const ExperimentalTimeline: React.FC<ExperimentalTimelineProps> = props => {
-  const { playhead, zoom } = props;
+const ExperimentalTimeline: React.FC<ExperimentalTimelineProps> = ({
+  playhead,
+}) => {
   const timelineRef = useRef<TimelineElement | null>(null);
+  const [zoom, setZoom] = useState(initial.zoom);
 
   /**
    * This React.useEffect will always run twice on initial load in development
@@ -81,13 +83,20 @@ const ExperimentalTimeline: React.FC<ExperimentalTimelineProps> = props => {
   }, []);
 
   return (
-    <Timeline
-      ref={timelineRef}
-      startTime={initial.start}
-      endTime={initial.end}
-      currentTime={playhead}
-      zoom={zoom}
-    />
+    <>
+      <Timeline
+        ref={timelineRef}
+        startTime={initial.start}
+        endTime={initial.end}
+        currentTime={playhead}
+        zoom={zoom}
+      />
+      <br />
+      <div className='zoom-control'>
+        <Zoom {...{ setZoom, zoom }} />
+        {<p>Experimental Zoom: {zoom}</p>}
+      </div>
+    </>
     // <Timeline
     //   ref={timelineRef}
     //   startTime={initial.start}
